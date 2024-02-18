@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -31,41 +32,10 @@ public class ProjectSecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-       /* UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("12345")
-                .authorities("admin")
-                .build();
-
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("12345")
-                .authorities("admin")
-                .build();*/
-
-//        Approach 2 : Not using any password Encoder
-//                UserDetails admin = User.withUsername("admin")
-//                .password("12345")
-//                .authorities("admin")
-//                .build();
-//
-//        UserDetails user = User.withUsername("user")
-//                .password("12345")
-//                .authorities("admin")
-//                .build();
-//        return new InMemoryUserDetailsManager(admin,user);
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService(DataSource dataSource) {
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
 
 }
